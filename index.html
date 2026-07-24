@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Barbearia do Matheus — cortes, barba e agendamento online."
+    />
+    <title>Barbearia do Matheus</title>
+
+    <!-- Fontes usadas no título e nos textos. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <!-- Coluna esquerda: apresentação e galeria. -->
+      <section class="gallery" aria-labelledby="title">
+        <h1 id="title">Barbearia<br /><em>do Matheus</em></h1>
+        <p class="eyebrow">Desde 2017 · Estilo & Resenha</p>
+        <p class="intro">
+          Cortes precisos, boa conversa e uma experiência feita para você.
+        </p>
+
+        <!--
+          Galeria de fotos. Para incluir outra foto, copie a tag <img> da foto principal
+          e coloque dentro do card desejado (.photo-two ou .photo-three).
+        -->
+        <div class="photos">
+          <div class="photo photo-one">
+            <img
+              src="img/corte_barba.png"
+              alt="Corte e barba realizados na Barbearia do Matheus"
+            />
+            <span>Cortes & barba</span>
+          </div>
+          <div class="photo photo-two">
+            <img
+              src="img/ambiente.png"
+              alt="Ambiente da Barbearia do Matheus"
+            />
+            <span>Ambiente exclusivo</span>
+          </div>
+          <div class="photo photo-three">
+            <img
+              src="img/visual.png"
+              alt="Cliente com visual finalizado na Barbearia do Matheus"
+            />
+            <span>Seu melhor visual</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Coluna direita: horários, agendamento e contatos. -->
+      <section class="schedule" aria-labelledby="schedule-title">
+        <p class="eyebrow">Visite-nos</p>
+        <h2 id="schedule-title">Horários de<br /><em>funcionamento</em></h2>
+
+        <div class="hours-list">
+          <article class="hours-item">
+            <span>Segunda</span>
+            <p>14:30 <b>—</b> 19:00</p>
+          </article>
+          <article class="hours-item">
+            <span>Terça a sábado</span>
+            <p>09:00 <b>—</b> 19:00</p>
+          </article>
+          <article class="hours-item">
+            <span>Domingo</span>
+            <p>09:00 <b>—</b> 12:30</p>
+          </article>
+        </div>
+
+        <!-- Link para o sistema de agendamento. -->
+        <a
+          class="booking"
+          href="https://chat.inbarberapp.com/Barbeariadomatheus"
+          target="_blank"
+          rel="noreferrer"
+          ><span>Agendar horario</span><i aria-hidden="true">→</i></a
+        >
+
+        <!-- Todos os dados abaixo são links clicáveis e possuem área para ícone. -->
+        <address class="contact-card">
+          <p class="contact-company">BarberShop LTDA</p>
+          <a
+            class="contact-link address-link"
+            href="https://www.google.com/maps/place/Barbearia+Do+Matheus/@-7.2123681,-35.9196419,15z/data=!4m10!1m2!2m1!1sbarbearia+do+matheus!3m6!1s0x7ac1fefbd7deb13:0x383cfd67037cbc99!8m2!3d-7.2123681!4d-35.9005875!15sChRiYXJiZWFyaWEgZG8gbWF0aGV1c5IBC2JhcmJlcl9zaG9w4AEA!16s%2Fg%2F11hhfx7syt?entry=ttu&g_ep=EgoyMDI2MDcxOS4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <!-- Troque este símbolo por: <img src="img/endereco.png" alt=""> -->
+            <span class="contact-icon address-icon" aria-hidden="true"></span
+            ><span class="contact-text"
+              ><span class="contact-label">Endereço</span
+              ><span>Rua Diogo da Costa 252</span></span
+            ><span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="contact-link whatsapp-link"
+            href="https://wa.me/5583996646306"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img class="contact-icon" src="img/whatsapp.png" alt="" /><span
+              class="contact-text"
+              ><span class="contact-label">WhatsApp</span
+              ><span>(83) 9 9664-6306</span></span
+            ><span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="contact-link instagram-link"
+            href="https://www.instagram.com/barbershopcg_matheus/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img class="contact-icon" src="img/instagram.png" alt="" /><span
+              class="contact-text"
+              ><span class="contact-label">Instagram</span
+              ><span>@barbershopcg_matheus</span></span
+            ><span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+        </address>
+      </section>
+    </main>
+  </body>
+</html>
