@@ -18,18 +18,33 @@ h1, h2 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 
 h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px; margin: 23px 0 36px; color: #d2d8dc; font-size: 15px; line-height: 1.65; }
 
 /* ================================================================
-   3. GALERIA DE FOTOS
-   Principal: 1600 x 900 px (16:9). Menores: 1200 x 900 px (4:3).
+   3. GALERIA DE FOTOS — Todas do mesmo tamanho e mais longas (verticais)
 ================================================================ */
-.photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 180px 118px; gap: 12px; }
-.photo { position: relative; display: flex; align-items: end; padding: 14px; overflow: hidden; isolation: isolate; background: #303030; }
+.photos { 
+  display: grid; 
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  gap: 12px; 
+}
+.photo { 
+  position: relative; 
+  display: flex; 
+  align-items: end; 
+  padding: 14px; 
+  overflow: hidden; 
+  isolation: isolate; 
+  background: #303030; 
+  aspect-ratio: 3 / 4; /* Deixa todas as fotos verticais e compridas de forma padronizada */
+}
 .photo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, #2a2a2a, #101010); transition: transform .35s ease; }
-/* Toda foto preenche o card sem deformar. */
 .photo img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .35s ease; }
 .photo:hover img, .photo:hover::before { transform: scale(1.06); }
 .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #000d, transparent 62%); }
 .photo span { z-index: 1; color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-.photo-one { grid-column: 1 / -1; }.photo-two::before { background: linear-gradient(135deg, #173f5d, #101010); }.photo-three::before { background: linear-gradient(135deg, #6d161d, #101010); }
+
+/* Cores de fundo individuais para cada card */
+.photo-one::before { background: linear-gradient(135deg, #101010, #071b2a); }
+.photo-two::before { background: linear-gradient(135deg, #173f5d, #101010); }
+.photo-three::before { background: linear-gradient(135deg, #6d161d, #101010); }
 
 /* ================================================================
    4. HORÁRIOS E AGENDAMENTO
@@ -44,31 +59,30 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
 
 /* ================================================================
    5. CONTATOS E ÍCONES
-   WhatsApp e Instagram usam as imagens em /img. Para o endereço, troque
-   o conteúdo de .address-icon por: <img src="img/endereco.png" alt="">.
 ================================================================ */
 .contact-card { display: grid; gap: 9px; margin-top: auto; padding-top: 26px; border-top: 1px solid var(--line); font-size: 12px; font-style: normal; }
 .contact-company { margin: 0 0 4px; color: var(--white); font-size: 15px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .contact-link { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px; min-height: 52px; padding: 8px 11px; border: 1px solid transparent; color: var(--white); background: #ffffff0a; font-weight: 600; line-height: 1.25; text-decoration: none; transition: .2s ease; }
-/* Moldura pronta para todos os favicons/ícones de contato. */
 .contact-icon { display: grid; width: 32px; height: 32px; place-items: center; padding: 5px; border: 1px solid #ffffff2a; border-radius: 50%; background: #0008; object-fit: contain; }
-/* Espaço de endereço: substitua o símbolo no HTML pela sua imagem quando desejar. */
 .address-icon { color: var(--blue); font-size: 22px; font-weight: 700; }.contact-text { display: grid; gap: 3px; }.contact-label { color: #ef6268; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }.contact-arrow { color: var(--blue); font-size: 17px; }
 .contact-link:hover { border-color: var(--blue); background: #1976bd21; transform: translateX(3px); }.whatsapp-link:hover { border-color: var(--red); background: #d5232c21; }.instagram-link:hover { border-color: var(--red); background: #d5232c21; }
 
 /* ================================================================
-   6. CELULAR — todas as três fotos continuam visíveis, uma após a outra.
+   6. CELULAR — Ajuste para manter o layout proporcional nas telas menores
 ================================================================ */
 @media (max-width: 720px) {
   .page { grid-template-columns: 1fr; width: 100%; box-shadow: none; }.gallery, .schedule { min-height: auto; padding: 34px 28px; }
   .eyebrow { margin-bottom: 9px; font-size: 9px; }h1 { font-size: clamp(32px, 10vw, 43px); }.intro { margin-bottom: 24px; }
-  /* As três fotos permanecem visíveis; a pessoa pode rolar a página para vê-las. */
-  .photos { grid-template-columns: 1fr; grid-template-rows: 190px 145px 145px; gap: 12px; }.photo, .photo-one { display: flex; grid-column: auto; }
+  
+  /* No celular, ajusta as fotos para ficarem em 3 colunas proporcionais ou você pode mudar para 1fr se preferir uma embaixo da outra */
+  .photos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .photo { aspect-ratio: 3 / 4; }
+
   .schedule h2 { font-size: clamp(29px, 8.6vw, 38px); }.hours-list { gap: 0; margin-top: 24px; }.hours-item { padding: 11px 0; }.hours-item span { font-size: 10px; }.hours-item p { font-size: 12px; }
   .booking { min-height: 72px; margin-top: 28px; padding: 20px; font-size: 16px; }.contact-card { margin-top: 32px; padding-top: 22px; }.contact-link { font-size: 11px; }
 }
 
-/* Telas baixas em paisagem: mantém duas colunas, mas nunca esconde as fotos. */
+/* Telas baixas em paisagem */
 @media (max-height: 560px) and (orientation: landscape) {
-  .page { grid-template-columns: 1.1fr .9fr; width: 100%; }.gallery, .schedule { padding: 28px 34px; }.photos { grid-template-rows: 150px 95px; }.intro { margin: 12px 0 18px; }h1, .schedule h2 { font-size: 30px; }.hours-list { gap: 0; margin-top: 16px; }.hours-item { padding: 7px 0; }.booking { margin-top: 15px; padding: 11px 14px; }.contact-card { margin-top: 16px; padding-top: 13px; }
+  .page { grid-template-columns: 1.1fr .9fr; width: 100%; }.gallery, .schedule { padding: 28px 34px; }.photos { grid-template-columns: repeat(3, minmax(0, 1fr)); }.intro { margin: 12px 0 18px; }h1, .schedule h2 { font-size: 30px; }.hours-list { gap: 0; margin-top: 16px; }.hours-item { padding: 7px 0; }.booking { margin-top: 15px; padding: 11px 14px; }.contact-card { margin-top: 16px; padding-top: 13px; }
 }
