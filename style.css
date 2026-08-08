@@ -18,12 +18,12 @@ h1, h2 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 
 h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px; margin: 23px 0 36px; color: #d2d8dc; font-size: 15px; line-height: 1.65; }
 
 /* ================================================================
-   3. GALERIA DE FOTOS — Todas do mesmo tamanho e mais longas (verticais)
+   3. GALERIA DE FOTOS — Uma abaixo da outra, compridas e padronizadas
 ================================================================ */
 .photos { 
   display: grid; 
-  grid-template-columns: repeat(3, minmax(0, 1fr)); 
-  gap: 12px; 
+  grid-template-columns: 1fr; /* Uma coluna só, empilhando as fotos */
+  gap: 16px; /* Espaço entre uma foto e outra */
 }
 .photo { 
   position: relative; 
@@ -33,7 +33,7 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
   overflow: hidden; 
   isolation: isolate; 
   background: #303030; 
-  aspect-ratio: 3 / 4; /* Deixa todas as fotos verticais e compridas de forma padronizada */
+  aspect-ratio: 16 / 9; /* Formato retangular mais longo. Se quiser mais vertical estilo porta-retrato, mude para 4 / 3 ou 3 / 4 */
 }
 .photo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, #2a2a2a, #101010); transition: transform .35s ease; }
 .photo img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .35s ease; }
@@ -53,7 +53,7 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
 .hours-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--line); }
 .hours-item span { color: #f05b61; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }.hours-item p { margin: 0; font-size: 14px; }.hours-item b { padding: 0 4px; color: var(--blue); font-weight: 700; }
 
-/* Botão principal: vermelho vibrante, sombra e faixa azul para chamar atenção. */
+/* Botão principal */
 .booking { display: flex; align-items: center; justify-content: space-between; min-height: 82px; margin-top: 36px; padding: 23px 24px 23px 29px; border: 2px solid #ff777c; border-left: 9px solid var(--blue); background: linear-gradient(100deg, var(--red), #ef3039); box-shadow: 0 14px 34px #d5232c77; color: #fff; font-size: 20px; font-weight: 700; letter-spacing: .09em; text-decoration: none; text-transform: uppercase; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
 .booking:hover { background: linear-gradient(100deg, var(--blue), #258cd7); box-shadow: 0 12px 30px #1976bd66; transform: translateY(-3px); }.booking i { font-size: 26px; font-style: normal; line-height: 12px; }
 
@@ -68,15 +68,14 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
 .contact-link:hover { border-color: var(--blue); background: #1976bd21; transform: translateX(3px); }.whatsapp-link:hover { border-color: var(--red); background: #d5232c21; }.instagram-link:hover { border-color: var(--red); background: #d5232c21; }
 
 /* ================================================================
-   6. CELULAR — Ajuste para manter o layout proporcional nas telas menores
+   6. CELULAR E TELAS MENORES
 ================================================================ */
 @media (max-width: 720px) {
   .page { grid-template-columns: 1fr; width: 100%; box-shadow: none; }.gallery, .schedule { min-height: auto; padding: 34px 28px; }
   .eyebrow { margin-bottom: 9px; font-size: 9px; }h1 { font-size: clamp(32px, 10vw, 43px); }.intro { margin-bottom: 24px; }
   
-  /* No celular, ajusta as fotos para ficarem em 3 colunas proporcionais ou você pode mudar para 1fr se preferir uma embaixo da outra */
-  .photos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-  .photo { aspect-ratio: 3 / 4; }
+  .photos { grid-template-columns: 1fr; gap: 12px; }
+  .photo { aspect-ratio: 16 / 9; }
 
   .schedule h2 { font-size: clamp(29px, 8.6vw, 38px); }.hours-list { gap: 0; margin-top: 24px; }.hours-item { padding: 11px 0; }.hours-item span { font-size: 10px; }.hours-item p { font-size: 12px; }
   .booking { min-height: 72px; margin-top: 28px; padding: 20px; font-size: 16px; }.contact-card { margin-top: 32px; padding-top: 22px; }.contact-link { font-size: 11px; }
@@ -84,5 +83,5 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
 
 /* Telas baixas em paisagem */
 @media (max-height: 560px) and (orientation: landscape) {
-  .page { grid-template-columns: 1.1fr .9fr; width: 100%; }.gallery, .schedule { padding: 28px 34px; }.photos { grid-template-columns: repeat(3, minmax(0, 1fr)); }.intro { margin: 12px 0 18px; }h1, .schedule h2 { font-size: 30px; }.hours-list { gap: 0; margin-top: 16px; }.hours-item { padding: 7px 0; }.booking { margin-top: 15px; padding: 11px 14px; }.contact-card { margin-top: 16px; padding-top: 13px; }
+  .page { grid-template-columns: 1.1fr .9fr; width: 100%; }.gallery, .schedule { padding: 28px 34px; }.photos { grid-template-columns: 1fr; }.intro { margin: 12px 0 18px; }h1, .schedule h2 { font-size: 30px; }.hours-list { gap: 0; margin-top: 16px; }.hours-item { padding: 7px 0; }.booking { margin-top: 15px; padding: 11px 14px; }.contact-card { margin-top: 16px; padding-top: 13px; }
 }
