@@ -18,12 +18,12 @@ h1, h2 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 
 h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px; margin: 23px 0 36px; color: #d2d8dc; font-size: 15px; line-height: 1.65; }
 
 /* ================================================================
-   3. GALERIA DE FOTOS — Uma abaixo da outra, compridas e padronizadas
+   3. GALERIA DE FOTOS — Uma abaixo da outra em formato de retângulo em pé
 ================================================================ */
 .photos { 
   display: grid; 
   grid-template-columns: 1fr; /* Uma coluna só, empilhando as fotos */
-  gap: 16px; /* Espaço entre uma foto e outra */
+  gap: 18px; /* Espaço entre uma foto e outra */
 }
 .photo { 
   position: relative; 
@@ -33,7 +33,7 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
   overflow: hidden; 
   isolation: isolate; 
   background: #303030; 
-  aspect-ratio: 16 / 9; /* Formato retangular mais longo. Se quiser mais vertical estilo porta-retrato, mude para 4 / 3 ou 3 / 4 */
+  aspect-ratio: 3 / 4; /* <-- Formato de retângulo em pé (vertical). Se quiser mais comprido ainda, mude para 4 / 5 */
 }
 .photo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, #2a2a2a, #101010); transition: transform .35s ease; }
 .photo img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .35s ease; }
@@ -74,8 +74,8 @@ h1 em, h2 em { color: var(--red); font-style: normal; }.intro { max-width: 330px
   .page { grid-template-columns: 1fr; width: 100%; box-shadow: none; }.gallery, .schedule { min-height: auto; padding: 34px 28px; }
   .eyebrow { margin-bottom: 9px; font-size: 9px; }h1 { font-size: clamp(32px, 10vw, 43px); }.intro { margin-bottom: 24px; }
   
-  .photos { grid-template-columns: 1fr; gap: 12px; }
-  .photo { aspect-ratio: 16 / 9; }
+  .photos { grid-template-columns: 1fr; gap: 14px; }
+  .photo { aspect-ratio: 3 / 4; }
 
   .schedule h2 { font-size: clamp(29px, 8.6vw, 38px); }.hours-list { gap: 0; margin-top: 24px; }.hours-item { padding: 11px 0; }.hours-item span { font-size: 10px; }.hours-item p { font-size: 12px; }
   .booking { min-height: 72px; margin-top: 28px; padding: 20px; font-size: 16px; }.contact-card { margin-top: 32px; padding-top: 22px; }.contact-link { font-size: 11px; }
