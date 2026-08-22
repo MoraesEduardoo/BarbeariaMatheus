@@ -1,410 +1,548 @@
 /* ================================================================
-   1. PALETA DE CORES — preto é a base; vermelho, branco e azul são apoio.
+   1. CONFIGURAÇÕES CYBER & VARIÁVEIS
 ================================================================ */
 :root {
-  --black: #090909;
-  --surface: #141414;
-  --red: #d5232c;
-  --red-dark: #97151b;
-  --white: #f7f7f7;
-  --blue: #1976bd;
-  --blue-dark: #0c3555;
-  --line: rgba(255, 255, 255, 0.16);
+  --bg-deep: #030305;
+  --surface: #0a0b10;
+  --surface-hover: #12141c;
+  --primary-red: #ff1e3c;
+  --primary-red-glow: rgba(255, 30, 60, 0.4);
+  --cyan-glow: rgba(0, 243, 255, 0.15);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-cyber: rgba(255, 30, 60, 0.3);
+  --radius-lg: 24px;
+  --radius-md: 14px;
 }
+
 * {
   box-sizing: border-box;
-}
-body {
-  min-height: 100svh;
   margin: 0;
-  background: var(--black);
-  color: var(--white);
-  font-family: "DM Sans", Arial, sans-serif;
+  padding: 0;
 }
-body::before {
-  content: "";
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Fundo Cyber Grids & Orbes Luminosas */
+.cyber-grid {
   position: fixed;
   inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.glow-orb {
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  filter: blur(120px);
   z-index: -1;
-  background:
-    radial-gradient(circle at 8% 0%, #123d5c55, transparent 28%),
-    radial-gradient(circle at 95% 100%, #a919202e, transparent 30%);
+  pointer-events: none;
+}
+
+.orb-1 {
+  top: -10%;
+  left: -10%;
+  background: rgba(255, 30, 60, 0.12);
+}
+
+.orb-2 {
+  bottom: -10%;
+  right: -10%;
+  background: rgba(0, 243, 255, 0.07);
 }
 
 /* ================================================================
-   2. ESTRUTURA PRINCIPAL — computador em duas colunas.
+   2. ESTRUTURA PRINCIPAL (GRID)
 ================================================================ */
-.page {
+.page-container {
+  width: 100%;
+  max-width: 1200px;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  width: min(100% - 32px, 1050px);
-  min-height: 100svh;
-  margin: auto;
-  border-inline: 1px solid #ffffff0d;
-  box-shadow: 0 20px 70px #000;
+  gap: 24px;
+  align-items: stretch;
 }
-.gallery,
-.schedule {
-  padding: 62px;
-}
-.gallery {
-  overflow: hidden;
-  background: linear-gradient(145deg, #101010, #071b2a);
-}
-.schedule {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(160deg, #171717, #090909);
-}
-.eyebrow {
-  margin: 0 0 15px;
-  color: #ec4d54;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-h1,
-h2 {
-  margin: 0;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(36px, 4vw, 50px);
-  line-height: 1.06;
-  letter-spacing: -0.035em;
-}
-h1 em,
-h2 em {
-  color: var(--red);
-  font-style: normal;
-}
-.intro {
-  max-width: 330px;
-  margin: 23px 0 36px;
-  color: #d2d8dc;
-  font-size: 15px;
-  line-height: 1.65;
+
+@media (max-width: 1024px) {
+  .page-container {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+
+  body {
+    padding: 16px;
+    align-items: flex-start;
+  }
 }
 
 /* ================================================================
-   3. GALERIA DE FOTOS — 1ª deitada em cima, 2ª e 3ª em pé lado a lado embaixo
+   3. SEÇÃO HERO (ESQUERDA)
 ================================================================ */
-.photos {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 190px 220px; /* Linha de cima (deitada) e linha de baixo (em pé mais alta) */
-  gap: 12px;
-}
-.photo {
-  position: relative;
+.hero-section {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
   display: flex;
-  align-items: end;
-  padding: 14px;
-  overflow: hidden;
-  isolation: isolate;
-  background: #303030;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
 }
-.photo::before {
+
+.hero-section::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(135deg, #2a2a2a, #101010);
-  transition: transform 0.35s ease;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,
+      transparent,
+      var(--primary-red),
+      transparent);
 }
-.photo img {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 30, 60, 0.05);
+  border: 1px solid var(--border-cyber);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--primary-red);
+  margin-bottom: 16px;
+  box-shadow: 0 0 15px rgba(255, 30, 60, 0.15);
+}
+
+.pulse-dot,
+.mini-pulse {
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary-red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-red);
+  animation: cyberPulse 2s infinite;
+}
+
+@keyframes cyberPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 30, 60, 0.8);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(255, 30, 60, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 30, 60, 0);
+  }
+}
+
+h1 {
+  font-family: "Syncopate", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--primary-red);
+  text-shadow: 0 0 30px var(--primary-red-glow);
+}
+
+.intro-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Galeria Cyber */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 200px 200px;
+  gap: 12px;
+}
+
+.gallery-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #000;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 20px rgba(255, 30, 60, 0.3);
+}
+
+.card-large {
+  grid-row: span 2;
+}
+
+.gallery-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  transition: transform 0.35s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.3s ease;
+  filter: brightness(0.8) contrast(1.1);
 }
-.photo:hover img,
-.photo:hover::before {
-  transform: scale(1.06);
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.15);
 }
-.photo::after {
-  content: "";
+
+.card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #000d, transparent 62%);
+  background: linear-gradient(to top, rgba(3, 3, 5, 0.9) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
 }
-.photo span {
-  z-index: 1;
-  color: var(--white);
-  font-size: 11px;
+
+.card-overlay span {
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--primary-red);
+  text-shadow: 0 0 10px rgba(255, 30, 60, 0.5);
 }
 
-/* A primeira foto ocupa a largura inteira em cima (retângulo deitado) */
-.photo-one {
-  grid-column: 1 / -1;
-}
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 170px);
+  }
 
-/* Cores de fundo individuais para cada card */
-.photo-one::before {
-  background: linear-gradient(135deg, #101010, #071b2a);
-}
-.photo-two::before {
-  background: linear-gradient(135deg, #173f5d, #101010);
-}
-.photo-three::before {
-  background: linear-gradient(135deg, #6d161d, #101010);
+  .card-large {
+    grid-row: span 1;
+  }
 }
 
 /* ================================================================
-   4. HORÁRIOS E AGENDAMENTO
+   4. SEÇÃO DASHBOARD (DIREITA)
 ================================================================ */
-.schedule h2 {
-  font-size: clamp(32px, 3.6vw, 43px);
-}
-.hours-list {
-  display: grid;
-  gap: 10px;
-  margin-top: 39px;
-}
-.hours-item {
+.dashboard-section {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--line);
-}
-.hours-item span {
-  color: #f05b61;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.hours-item p {
-  margin: 0;
-  font-size: 14px;
-}
-.hours-item b {
-  padding: 0 4px;
-  color: var(--blue);
-  font-weight: 700;
+  gap: 24px;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
 }
 
-/* Botão principal */
-.booking {
+.dashboard-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 243, 255, 0.5),
+      transparent);
+}
+
+.section-header .tag {
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-header h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.section-header h2 em {
+  font-style: normal;
+  color: var(--primary-red);
+  text-shadow: 0 0 20px var(--primary-red-glow);
+}
+
+/* Horários Matriz */
+.schedule-matrix {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.matrix-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.matrix-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.matrix-item.highlight {
+  background: linear-gradient(90deg,
+      rgba(255, 30, 60, 0.06),
+      rgba(0, 243, 255, 0.02));
+  border-color: var(--border-cyber);
+  box-shadow: 0 0 15px rgba(255, 30, 60, 0.08);
+}
+
+.matrix-item .day {
+  color: var(--text-muted);
+}
+
+.matrix-item .time {
+  font-weight: 700;
+  font-family: monospace;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+/* Botão CTA Imersivo */
+.cta-booking-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 82px;
-  margin-top: 36px;
-  padding: 23px 24px 23px 29px;
-  border: 2px solid #ff777c;
-  border-left: 9px solid var(--blue);
-  background: linear-gradient(100deg, var(--red), #ef3039);
-  box-shadow: 0 14px 34px #d5232c77;
+  background: linear-gradient(135deg, var(--primary-red), #990014);
   color: #fff;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  text-transform: uppercase;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+  box-shadow: 0 10px 30px var(--primary-red-glow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.booking:hover {
-  background: linear-gradient(100deg, var(--blue), #258cd7);
-  box-shadow: 0 12px 30px #1976bd66;
+
+.cta-booking-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transition: 0.5s;
+}
+
+.cta-booking-btn:hover::after {
+  left: 100%;
+}
+
+.cta-booking-btn:hover {
   transform: translateY(-3px);
-}
-.booking i {
-  font-size: 26px;
-  font-style: normal;
-  line-height: 12px;
+  box-shadow: 0 15px 40px rgba(255, 30, 60, 0.6);
 }
 
-/* ================================================================
-   5. CONTATOS E ÍCONES
-================================================================ */
-.contact-card {
-  display: grid;
-  gap: 9px;
-  margin-top: auto;
-  padding-top: 26px;
-  border-top: 1px solid var(--line);
-  font-size: 12px;
-  font-style: normal;
+.cta-content {
+  display: flex;
+  flex-direction: column;
 }
-.contact-company {
-  margin: 0 0 4px;
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+
+.cta-content strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
-.contact-link {
-  display: grid;
-  grid-template-columns: 34px 1fr auto;
-  align-items: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 8px 11px;
-  border: 1px solid transparent;
-  color: var(--white);
-  background: #ffffff0a;
-  font-weight: 600;
-  line-height: 1.25;
-  text-decoration: none;
-  transition: 0.2s ease;
+
+.cta-content span {
+  font-size: 0.75rem;
+  font-family: monospace;
+  opacity: 0.9;
 }
-.contact-icon {
-  display: grid;
-  width: 32px;
-  height: 32px;
-  place-items: center;
-  padding: 5px;
-  border: 1px solid #ffffff2a;
+
+.cta-arrow {
+  background: rgba(0, 0, 0, 0.3);
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: #0008;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.cta-booking-btn:hover .cta-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Painel de Contatos HUD */
+.contacts-panel {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-style: normal;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.status-online {
+  color: #00f3ff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+}
+
+.mini-pulse {
+  background-color: #00f3ff;
+  box-shadow: 0 0 8px #00f3ff;
+}
+
+.contacts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+}
+
+.contact-node:hover {
+  background: var(--surface-hover);
+  border-color: rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.08);
+}
+
+.contact-node img {
+  width: 22px;
+  height: 22px;
   object-fit: contain;
-}
-.address-icon {
-  color: var(--blue);
-  font-size: 22px;
-  font-weight: 700;
-}
-.contact-text {
-  display: grid;
-  gap: 3px;
-}
-.contact-label {
-  color: #ef6268;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.contact-arrow {
-  color: var(--blue);
-  font-size: 17px;
-}
-.contact-link:hover {
-  border-color: var(--blue);
-  background: #1976bd21;
-  transform: translateX(3px);
-}
-.whatsapp-link:hover {
-  border-color: var(--red);
-  background: #d5232c21;
-}
-.instagram-link:hover {
-  border-color: var(--red);
-  background: #d5232c21;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
 }
 
-/* ================================================================
-   6. CELULAR E TELAS MENORES
-================================================================ */
-@media (max-width: 720px) {
-  .page {
-    grid-template-columns: 1fr;
-    width: 100%;
-    box-shadow: none;
-  }
-  .gallery,
-  .schedule {
-    min-height: auto;
-    padding: 34px 28px;
-  }
-  .eyebrow {
-    margin-bottom: 9px;
-    font-size: 9px;
-  }
-  h1 {
-    font-size: clamp(32px, 10vw, 43px);
-  }
-  .intro {
-    margin-bottom: 24px;
-  }
+.contact-node div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
 
-  .photos {
-    grid-template-columns: 1fr;
-    grid-template-rows: 180px 150px 150px;
-    gap: 12px;
-  }
-  .photo,
-  .photo-one {
-    display: flex;
-    grid-column: auto;
-  }
+.contact-node small {
+  font-family: monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
 
-  .schedule h2 {
-    font-size: clamp(29px, 8.6vw, 38px);
-  }
-  .hours-list {
-    gap: 0;
-    margin-top: 24px;
-  }
-  .hours-item {
-    padding: 11px 0;
-  }
-  .hours-item span {
-    font-size: 10px;
-  }
-  .hours-item p {
-    font-size: 12px;
-  }
-  .booking {
-    min-height: 72px;
-    margin-top: 28px;
+.contact-node strong {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.node-arrow {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.contact-node:hover .node-arrow {
+  color: #00f3ff;
+  transform: translate(2px, -2px);
+}
+
+/* Responsividade Mobile e Small Screens */
+@media (max-width: 480px) {
+
+  .hero-section,
+  .dashboard-section {
     padding: 20px;
-    font-size: 16px;
   }
-  .contact-card {
-    margin-top: 32px;
-    padding-top: 22px;
-  }
-  .contact-link {
-    font-size: 11px;
-  }
-}
 
-/* Telas baixas em paisagem */
-@media (max-height: 560px) and (orientation: landscape) {
-  .page {
-    grid-template-columns: 1.1fr 0.9fr;
-    width: 100%;
-  }
-  .gallery,
-  .schedule {
-    padding: 28px 34px;
-  }
-  .photos {
-    grid-template-rows: 150px 130px;
-  }
-  .intro {
-    margin: 12px 0 18px;
-  }
-  h1,
-  .schedule h2 {
-    font-size: 30px;
-  }
-  .hours-list {
-    gap: 0;
-    margin-top: 16px;
-  }
-  .hours-item {
-    padding: 7px 0;
-  }
-  .booking {
-    margin-top: 15px;
-    padding: 11px 14px;
-  }
-  .contact-card {
-    margin-top: 16px;
-    padding-top: 13px;
+  body {
+    padding: 10px;
   }
 }
